@@ -1,20 +1,36 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+  import React from "react";
+  import { NavigationContainer } from "@react-navigation/native";
+  import { createStackNavigator } from "@react-navigation/stack";
+  import BottomNav from "./components/BottomNav";
+  import SplashScreen from "./pages/Splashscreen";
+  import DetailArtikel from "./pages/DetailArtikel"; 
+  import DetailHewan from "./pages/DetailHewan"; 
+  import EditProfileScreen from "./pages/EditProfileScreen"; 
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+  const Stack = createStackNavigator();
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+  const App = () => {
+    console.log("Rendering App");
+    return (
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="SplashScreen">
+          <Stack.Screen name="SplashScreen" component={SplashScreen} options={{ headerShown: false }}/>
+          <Stack.Screen name="MainApp" component={MainApp} options={{ headerShown: false }}/>
+        </Stack.Navigator>
+      </NavigationContainer>
+    );
+  }
+  
+  const MainApp = () => {
+    console.log("Rendering MainApp");
+    return (
+      <Stack.Navigator initialRouteName="BottomNav">
+        <Stack.Screen name="BottomNav" component={BottomNav} options={{ headerShown: false }}/>
+        <Stack.Screen name="DetailArtikel" component={DetailArtikel} options={{ headerShown: false }}/>
+        <Stack.Screen name="DetailHewan" component={DetailHewan} options={{ headerShown: false }}/>
+        <Stack.Screen name="Edit" component={EditProfileScreen} />
+      </Stack.Navigator>
+    );
+  }
+  
+  export default App;
